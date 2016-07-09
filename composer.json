@@ -1,0 +1,26 @@
+{
+    "name": "carstenwindler/cleansman",
+    "description": "A Codeception extension for cleaning up test output before you run new tests.",
+    "keywords": ["codeception", "extension", "cleanup", "output"],
+    "homepage": "https://github.com/carstenwindler/cleansman",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carsten Windler",
+            "email": "carsten@carstenwindler.de"
+        }
+    ],
+    "require": {
+        "codeception/codeception": "^2.1",
+        "symfony/finder": "2.*",
+        "symfony/filesystem": "2.*",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+          "Codeception\\Extension\\": "src/"
+        }
+    }
+}
