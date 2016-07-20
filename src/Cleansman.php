@@ -7,12 +7,12 @@
 
 namespace Codeception\Extension;
 
-use Codeception\Exception\ExtensionException;
+use Codeception\Configuration as Config;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-class Cleansman extends \Codeception\Platform\Extension
+class Cleansman extends \Codeception\Extension
 {
     // list events to listen to
     static $events = array(
