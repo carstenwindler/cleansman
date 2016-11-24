@@ -1,5 +1,7 @@
 <?php
 
+namespace demo;
+
 use AspectMock\Test as AspectMock;
 use Mockery as m;
 use org\bovigo\vfs\vfsStream;
@@ -25,16 +27,19 @@ class ModuleInitTest extends \PHPUnit_Framework_TestCase
         AspectMock::clean();
     }
 
+    private function createFile($fileName)
+    {
+        return vfsStream::newFile($fileName)->setContent($content = 'Some content here');
+    }
+
     public function testModuleInit()
     {
-        $file1 = vfsStream::newFile('file1')->setContent($content = 'Some content here');
-        $this->vfsRoot->addChild($file1);
-
-        $file2 = vfsStream::newFile('file2')->setContent($content = 'Some content here');
-        $this->vfsRoot->addChild($file2, 'some content');
+        $this->vfsRoot->addChild($this->createFile('file1'));
+        $this->vfsRoot->addChild($this->createFile('file1'));
+        $this->vfsRoot->addChild(vfsStream::newDirectory('dir1'));
 
         AspectMock::double(
-            Codeception\Configuration::class,
+            \Codeception\Configuration::class,
             [ 'outputDir' => vfsStream::url('outputDir') ]
         );
 
@@ -47,5 +52,6 @@ class ModuleInitTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->vfsRoot->hasChild('file1'));
         $this->assertFalse($this->vfsRoot->hasChild('file2'));
+        $this->assertFalse($this->vfsRoot->hasChild('dir1'));
     }
 }

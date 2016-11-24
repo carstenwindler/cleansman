@@ -26,22 +26,14 @@ class Cleansman extends \Codeception\Extension
     {
         $this->write('Cleansman is cleaning up your mess...');
 
-        $cleanupCounter = 0;
         $fs = new Filesystem();
         $finder = new Finder();
 
         $finder->in($this->getLogDir());
+        $fs->remove($finder);
 
-        foreach ($finder as $file) {
-            try {
-                $fs->remove($file);
-
-                $cleanupCounter++;
-            } catch (IOExceptionInterface $e) {
-                $this->writeln('An error occurred while trying to remove ' . $e->getPath());
-            }
-        }
-
-        $this->writeln('done! (Removed ' . $cleanupCounter . ' files)');
+        $this->writeln('done! (Removed ' . $finder->count() . ' files)');
     }
+
+
 }
