@@ -1,7 +1,5 @@
 <?php
 
-namespace demo;
-
 use AspectMock\Test as AspectMock;
 use Mockery as m;
 use org\bovigo\vfs\vfsStream;
@@ -29,7 +27,7 @@ class ModuleInitTest extends \PHPUnit_Framework_TestCase
 
     private function createFile($fileName)
     {
-        return vfsStream::newFile($fileName)->setContent($content = 'Some content here');
+        return vfsStream::newFile($fileName)->setContent('Some content here');
     }
 
     public function testModuleInit()
